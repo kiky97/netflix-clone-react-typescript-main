@@ -14,15 +14,38 @@ import {
 import store from "src/store";
 
 export async function loader({ params }: LoaderFunctionArgs) {
+  /////定义了一个loader, 先准备好数据，
   let genre: CustomGenre | Genre | undefined = COMMON_TITLES.find(
     (t) => t.apiString === (params.genreId as string)
   );
+  ////CustomGenre类型名字，Genre
   if (!genre) {
     const genres = await store
       .dispatch(genreSliceEndpoints.getGenres.initiate(MEDIA_TYPE.Movie))
       .unwrap();
     genre = genres?.find((t) => t.id.toString() === (params.genreId as string));
   }
+  //dispatch 是我要做什么告诉store, 
+  你（Component）
+        │
+        │ "我要获取电影分类"
+        ▼
+dispatch(...)
+        │
+        ▼
+Redux Store
+        │
+        ▼
+发送请求
+        │
+        ▼
+服务器
+        │
+        ▼
+返回数据
+        │
+        ▼
+Redux 保存数据///
 
   return genre;
 }

@@ -34,3 +34,21 @@ const router = createBrowserRouter([
 ]);
 
 export default router;
+
+
+
+BrowserRouter
+│
+└── "/"
+     │
+     ├── MainLayout
+     │      │
+     │      └── <Outlet />
+     │
+     ├── ""  ------------------> Navigate("/browse")
+     │
+     ├── "/browse" -------------> HomePage
+     │
+     ├── "/genre/:genreId" -----> GenreExplore
+     │
+     └── "/watch" --------------> WatchPage
